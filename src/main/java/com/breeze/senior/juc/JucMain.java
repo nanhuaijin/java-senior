@@ -1,7 +1,5 @@
 package com.breeze.senior.juc;
 
-import javafx.beans.binding.When;
-
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class JucMain {
     public static void main(String[] args) {
 
-        // JucMain.visibility();
+        JucMain.visibility();
         JucMain.unAtomicity();
     }
 
