@@ -1,4 +1,4 @@
-package com.breeze.senior.juc;
+package com.breeze.senior.volati1e;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit;
  * @date : 2020/5/25
  * @description : JUC main方法
  */
-public class JucMain {
+public class VolatileMain {
     public static void main(String[] args) {
 
-        JucMain.visibility();
-        JucMain.unAtomicity();
+        VolatileMain.visibility();
+        VolatileMain.unAtomicity();
     }
 
     /**
@@ -20,13 +20,13 @@ public class JucMain {
      *  2.使用juc下AtomicInteger
      */
     public static void unAtomicity() {
-        Data data = new Data();
+        VolatileData volatileData = new VolatileData();
 
         for (int i = 1; i <= 20; i++) {
             new Thread(() -> {
                 for (int j = 1; j <= 1000 ; j++) {
-                    data.addPlus();
-                    data.addAtomic();
+                    volatileData.addPlus();
+                    volatileData.addAtomic();
                 }
             }, String.valueOf(i)).start();
         }
@@ -34,29 +34,29 @@ public class JucMain {
         while (Thread.activeCount() > 2) {
             Thread.yield();
         }
-        System.out.println(Thread.currentThread().getName() + "\tfinally number value: " + data.number);
-        System.out.println(Thread.currentThread().getName() + "\tmission is over atomic value: " + data.atomicInteger);
+        System.out.println(Thread.currentThread().getName() + "\tfinally number value: " + volatileData.number);
+        System.out.println(Thread.currentThread().getName() + "\tmission is over atomic value: " + volatileData.atomicInteger);
     }
 
     /**
      * 验证volatile可见性
      */
     public static void visibility() {
-        Data data = new Data();
+        VolatileData volatileData = new VolatileData();
 
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + "\tcome in");
             try { TimeUnit.SECONDS.sleep(3); } catch (InterruptedException e) { e.printStackTrace(); }
 
-            data.numberTo60();
-            System.out.println(Thread.currentThread().getName() + "\tupdate number value: " + data.number);
+            volatileData.numberTo60();
+            System.out.println(Thread.currentThread().getName() + "\tupdate number value: " + volatileData.number);
         }, "A").start();
 
-        while (data.number == 0) {
+        while (volatileData.number == 0) {
             //不加volatile，程序会一直在这里打转，下面的mission is over不会执行
             //加了volatile 下面会打印
         }
 
-        System.out.println(Thread.currentThread().getName() + "\tmission is over main number value: " + data.number);
+        System.out.println(Thread.currentThread().getName() + "\tmission is over main number value: " + volatileData.number);
     }
 }

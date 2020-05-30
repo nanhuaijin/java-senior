@@ -1,4 +1,4 @@
-package com.breeze.senior.juc;
+package com.breeze.senior.volati1e;
 
 /**
  * @author : breeze

@@ -1,4 +1,4 @@
-package com.breeze.senior.juc;
+package com.breeze.senior.volati1e;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date : 2020/5/25
  * @description : 多线程资源类
  */
-public class Data {
+public class VolatileData {
     volatile int number = 0;
     boolean flag = false;
     /**
