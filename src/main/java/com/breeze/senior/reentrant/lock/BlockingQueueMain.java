@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class BlockingQueueMain {
     public static void main(String[] args) {
-
         BlockingQueueResource resource = new BlockingQueueResource(new ArrayBlockingQueue<>(10));
 
         new Thread(() -> {
